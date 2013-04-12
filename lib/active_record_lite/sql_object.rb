@@ -28,4 +28,27 @@ class SQLObject < MassObject
 
     results.map { |result| self.new(result) }.first
   end
+
+  def create
+    attr_names = self.class.attributes.join(", ")
+    question_marks = (["?"] * self.class.attributes.count).join(", ")
+
+    DBConnection.execute(<<-SQL, *attribute_values)
+      INSERT INTO #{self.class.table_name} (#{attr_names}) VALUES (#{question_marks})
+    SQL
+  end
+
+  def update
+    set_line = self.class.attributes.map { |attr| "#{attr} = ?" }.join(", ")
+
+    DBConnection.execute(<<-SQL, *attribute_values, id)
+      UPDATE #{self.class.table_name}
+         SET #{set_line}
+       WHERE id = ?
+    SQL
+  end
+
+  def attribute_values
+    self.class.attributes.map { |attr| self.send(attr) }
+  end
 end

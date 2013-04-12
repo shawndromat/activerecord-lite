@@ -21,3 +21,11 @@ p Cat.find(2)
 
 p Human.all
 p Cat.all
+
+c = Cat.new(:name => "Gizmo")
+c.create
+
+h = Human.find(1)
+h.fname = "Matt"
+h.lname = "Rubens"
+h.update
