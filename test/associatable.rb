@@ -15,8 +15,13 @@ end
 class Human < SQLObject
   set_table_name("humans")
   set_attrs(:id, :fname, :lname)
+
+  has_many :cats, :foreign_key => :owner_id
 end
 
 cat = Cat.find(1)
 p cat
 p cat.human
+
+human = Human.find(1)
+p human.cats
