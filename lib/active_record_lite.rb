@@ -1,1 +1,2 @@
-require_relative './active_record_lite/mass_object.rb'
+require_relative './active_record_lite/mass_object'
+require_relative './active_record_lite/sql_object'
