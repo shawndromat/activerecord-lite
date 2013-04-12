@@ -86,8 +86,6 @@ module Associatable
     define_method(name) do
       params1 = self.class.assoc_params[assoc1]
       params2 = params1.other_class.assoc_params[assoc2]
-      p params1
-      p params2
 
       if (params1.type == :belongs_to) && (params2.type == :belongs_to)
         pk1 = self.send(params1.foreign_key)
