@@ -26,6 +26,6 @@ class SQLObject < MassObject
        WHERE id = ?
     SQL
 
-    results.map { |result| self.new(result) }
+    results.map { |result| self.new(result) }.first
   end
 end
