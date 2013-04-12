@@ -11,6 +11,10 @@ class DBConnection
     @db.execute(*args)
   end
 
+  def self.last_insert_row_id
+    @db.last_insert_row_id
+  end
+
   private
   def initialize(db_file_name)
   end

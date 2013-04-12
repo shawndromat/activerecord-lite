@@ -23,8 +23,5 @@ p Human.all
 p Cat.all
 
 c = Cat.new(:name => "Gizmo", :owner_id => 1)
-c.save
-
-h = Human.find(1)
-# just run an UPDATE; no values changed, so shouldnt hurt the db
-h.save
+c.save # create
+c.save # update

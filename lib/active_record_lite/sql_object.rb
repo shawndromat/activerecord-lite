@@ -41,6 +41,8 @@ class SQLObject < MassObject
     DBConnection.execute(<<-SQL, *attribute_values)
       INSERT INTO #{self.class.table_name} (#{attr_names}) VALUES (#{question_marks})
     SQL
+
+    self.id = DBConnection.last_insert_row_id
   end
 
   def update
