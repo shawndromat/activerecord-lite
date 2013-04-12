@@ -46,13 +46,13 @@ end
 
 module Associatable
   def assoc_params
+    @assoc_params ||= {}
     @assoc_params
   end
 
   def belongs_to(name, params = {})
-    @assoc_params ||= {}
     aps = BelongsToAssocParams.new(name, params)
-    @assoc_params[name] = aps
+    assoc_params[name] = aps
 
     define_method(name) do
       results = DBConnection.execute(<<-SQL, self.send(aps.foreign_key))
@@ -66,9 +66,8 @@ module Associatable
   end
 
   def has_many(name, params = {})
-    @assoc_params ||= {}
     aps = HasManyAssocParams.new(name, params)
-    @assoc_params[name] = aps
+    assoc_params[name] = aps
 
     define_method(name) do
       results = DBConnection.execute(<<-SQL, self.send(aps.primary_key))
@@ -80,7 +79,6 @@ module Associatable
       aps.other_class.parse_all(results)
     end
   end
-
 
   def has_one_through(name, assoc1, assoc2)
     define_method(name) do
