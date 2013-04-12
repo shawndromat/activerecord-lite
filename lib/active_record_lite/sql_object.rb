@@ -19,7 +19,7 @@ class SQLObject < MassObject
         FROM #{table_name}
     SQL
 
-    results.map { |result| self.new(result) }
+    parse_all(results)
   end
 
   def self.find(id)
@@ -29,7 +29,7 @@ class SQLObject < MassObject
        WHERE id = ?
     SQL
 
-    results.map { |result| self.new(result) }.first
+    parse_all(results).first
   end
 
   def create

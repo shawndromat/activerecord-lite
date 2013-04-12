@@ -14,6 +14,11 @@ class MassObject
     @attributes
   end
 
+  def self.parse_all(results)
+    results.map { |result| self.new(result) }
+  end
+
+
   def initialize(params = {})
     params.each do |attr_name, value|
       attr_name = attr_name.to_sym
