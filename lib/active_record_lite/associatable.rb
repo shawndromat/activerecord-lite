@@ -31,9 +31,9 @@ class BelongsToAssocParams < AssocParams
 end
 
 class HasManyAssocParams < AssocParams
-  def initialize(name, params)
+  def initialize(name, params, self_class)
     @foreign_key = (params[:foreign_key] ||
-      "#{self.name.underscore}_id".to_sym)
+      "#{self_class.name.underscore}_id".to_sym)
     @other_class_name = (params[:class_name] ||
       name.to_s.singularize.camelcase)
     @primary_key = params[:primary_key] || :id
@@ -66,7 +66,7 @@ module Associatable
   end
 
   def has_many(name, params = {})
-    aps = HasManyAssocParams.new(name, params)
+    aps = HasManyAssocParams.new(name, params, self)
     assoc_params[name] = aps
 
     define_method(name) do
