@@ -12,7 +12,7 @@ end
 
 class Human < SQLObject
   set_table_name("humans")
-  set_attrs(:id, :fname, :lname)
+  set_attrs(:id, :fname, :lname, :house_id)
 end
 
 p Human.find(1)
@@ -22,7 +22,7 @@ p Cat.find(2)
 p Human.all
 p Cat.all
 
-c = Cat.new(:name => "Gizmo")
+c = Cat.new(:name => "Gizmo", :owner_id => 1)
 c.save
 
 h = Human.find(1)

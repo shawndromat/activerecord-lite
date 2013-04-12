@@ -12,7 +12,7 @@ end
 
 class Human < SQLObject
   set_table_name("humans")
-  set_attrs(:id, :fname, :lname)
+  set_attrs(:id, :fname, :lname, :house_id)
 end
 
 p Cat.where(:name => "Breakfast")
