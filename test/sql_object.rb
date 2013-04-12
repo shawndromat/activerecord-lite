@@ -23,9 +23,9 @@ p Human.all
 p Cat.all
 
 c = Cat.new(:name => "Gizmo")
-c.create
+c.save
 
 h = Human.find(1)
 h.fname = "Matt"
 h.lname = "Rubens"
-h.update
+h.save

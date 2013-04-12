@@ -48,6 +48,14 @@ class SQLObject < MassObject
     SQL
   end
 
+  def save
+    if id.nil?
+      create
+    else
+      update
+    end
+  end
+
   def attribute_values
     self.class.attributes.map { |attr| self.send(attr) }
   end
