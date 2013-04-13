@@ -16,4 +16,4 @@ class Human < SQLObject
 end
 
 p Cat.where(:name => "Breakfast")
-p Human.where(:fname => "Matt")
+p Human.where(:fname => "Matt", :house_id => 1)
