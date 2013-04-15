@@ -1,6 +1,6 @@
 require 'active_support/core_ext'
 require 'webrick'
-require_relative './controller_base'
+require 'rails_lite'
 
 # http://www.ruby-doc.org/stdlib-2.0/libdoc/webrick/rdoc/WEBrick.html
 # http://www.ruby-doc.org/stdlib-2.0/libdoc/webrick/rdoc/WEBrick/HTTPRequest.html
@@ -16,7 +16,7 @@ class MyController < ControllerBase
     # after you have sessions going, uncomment:
 #    session["count"] ||= 0
 #    session["count"] += 1
-    render_content("#{session["count"]}", "text/html")
+#    render_content("#{session["count"]}", "text/html")
 
     # after you have template rendering
 #    render :show

@@ -61,7 +61,7 @@ class ControllerBase
   end
 
   def render_content(content, type)
-    raise "double render error" unless @content.nil?
+    raise "double render error" if already_rendered?
 
     @res.content_type = type
     @res.body = content
