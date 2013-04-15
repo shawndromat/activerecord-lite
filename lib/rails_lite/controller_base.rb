@@ -3,7 +3,6 @@ require 'json'
 class Session
   def initialize(req)
     cookie = req.cookies.select do |c|
-      p c
       c.name == "_rails_lite_app"
     end.first
 
@@ -80,7 +79,7 @@ class ControllerBase
     )
   end
 
-  def call_action(name)
+  def invoke_action(name)
     self.send(name)
     render(name) unless already_rendered?
 
