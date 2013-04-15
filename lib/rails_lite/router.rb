@@ -11,7 +11,16 @@ class Route
   end
 
   def run(req, res)
-    @controller_class.new(req, res).invoke_action(action_name)
+    match_data = @pattern.match(req.path)
+
+    route_params = {}
+    match_data.names.each do |name|
+      route_params[name.to_sym] = match_data[name]
+    end
+
+    @controller_class
+      .new(req, res, route_params)
+      .invoke_action(action_name)
   end
 end
 

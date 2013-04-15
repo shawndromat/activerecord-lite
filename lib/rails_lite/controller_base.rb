@@ -26,14 +26,14 @@ class Session
 end
 
 class ControllerBase
-  def initialize(req, res)
+  attr_reader :params
+
+  def initialize(req, res, route_params)
     @req = req
     @res = res
-  end
 
-  def params
-    raise "not yet implemented"
-    @req.query
+    @params = route_params
+    @params.merge!(req.query)
   end
 
   def session

@@ -16,6 +16,10 @@ class StatusController < ControllerBase
 
     render_content(statuses.to_json, "text/json")
   end
+
+  def show
+    render_content("status ##{params[:id]}", "text/text")
+  end
 end
 
 class UserController < ControllerBase
@@ -29,8 +33,9 @@ end
 server.mount_proc '/' do |req, res|
   router = Router.new
   router.draw do
-    get Regexp.new("/statuses"), StatusController, :index
-    get Regexp.new("/users"), UserController, :index
+    get Regexp.new("^/statuses$"), StatusController, :index
+    get Regexp.new("^/statuses/(?<id>\\d+)$"), StatusController, :show
+    get Regexp.new("^/users$"), UserController, :index
   end
 
   route = router.run(req, res)
