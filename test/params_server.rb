@@ -12,7 +12,7 @@ trap('INT') { server.shutdown }
 
 class StatusesController < ControllerBase
   def create
-    render_content(@req.body.to_json, "text/json")
+    render_content(params.to_json, "text/json")
   end
 
   def new
