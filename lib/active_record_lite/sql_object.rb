@@ -1,3 +1,5 @@
+require 'active_support/inflector'
+
 require_relative './associatable'
 require_relative './db_connection'
 require_relative './mass_object'
@@ -12,7 +14,7 @@ class SQLObject < MassObject
   end
 
   def self.table_name
-    @table_name
+    @table_name || self.name.underscore
   end
 
   def self.all
