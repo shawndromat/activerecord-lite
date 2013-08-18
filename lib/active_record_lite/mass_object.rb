@@ -1,6 +1,7 @@
 class MassObject
   def self.my_attr_accessible(*attributes)
-    @attributes = attributes
+    # convert to array of symbols in case the user gives you strings.
+    @attributes = attributes.map { |attr_name| attr_name.to_sym }
 
     attributes.each do |attribute|
       # add setter/getter methods
