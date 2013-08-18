@@ -85,20 +85,18 @@ module Associatable
       params1 = self.class.assoc_params[assoc1]
       params2 = params1.other_class.assoc_params[assoc2]
 
-      if (params1.type == :belongs_to) && (params2.type == :belongs_to)
-        pk1 = self.send(params1.foreign_key)
-        results = DBConnection.execute(<<-SQL, pk1)
+      pk1 = self.send(params1.foreign_key)
+      results = DBConnection.execute(<<-SQL, pk1)
           SELECT #{params2.other_table}.*
-            FROM #{params1.other_table}
-            JOIN #{params2.other_table}
-              ON #{params1.other_table}.#{params2.foreign_key}
-                   = #{params2.other_table}.#{params2.primary_key}
-           WHERE #{params1.other_table}.#{params1.primary_key}
-                   = ?
-        SQL
+          FROM #{params1.other_table}
+          JOIN #{params2.other_table}
+            ON #{params1.other_table}.#{params2.foreign_key}
+                 = #{params2.other_table}.#{params2.primary_key}
+         WHERE #{params1.other_table}.#{params1.primary_key}
+                 = ?
+      SQL
 
-        params2.other_class.parse_all(results).first
-      end
+      params2.other_class.parse_all(results).first
     end
   end
 end
