@@ -36,12 +36,28 @@ class SQLObject < MassObject
     parse_all(results).first
   end
 
+  def save
+    if id.nil?
+      create
+    else
+      update
+    end
+  end
+
+  private
+  def attribute_values
+    self.class.attributes.map { |attr| self.send(attr) }
+  end
+
   def create
     attr_names = self.class.attributes.join(", ")
     question_marks = (["?"] * self.class.attributes.count).join(", ")
 
     DBConnection.execute(<<-SQL, *attribute_values)
-      INSERT INTO #{self.class.table_name} (#{attr_names}) VALUES (#{question_marks})
+      INSERT INTO
+        #{self.class.table_name} (#{attr_names})
+      VALUES
+        (#{question_marks})
     SQL
 
     self.id = DBConnection.last_insert_row_id
@@ -55,17 +71,5 @@ class SQLObject < MassObject
          SET #{set_line}
        WHERE id = ?
     SQL
-  end
-
-  def save
-    if id.nil?
-      create
-    else
-      update
-    end
-  end
-
-  def attribute_values
-    self.class.attributes.map { |attr| self.send(attr) }
   end
 end
