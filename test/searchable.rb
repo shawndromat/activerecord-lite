@@ -7,12 +7,12 @@ DBConnection.open(cats_db_file_name)
 
 class Cat < SQLObject
   set_table_name("cats")
-  set_attrs(:id, :name, :owner_id)
+  my_attr_accessible(:id, :name, :owner_id)
 end
 
 class Human < SQLObject
   set_table_name("humans")
-  set_attrs(:id, :fname, :lname, :house_id)
+  my_attr_accessible(:id, :fname, :lname, :house_id)
 end
 
 p Cat.where(:name => "Breakfast")
