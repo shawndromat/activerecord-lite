@@ -90,8 +90,8 @@ describe "Associatable" do
     end
 
     class House < SQLObject
-      my_attr_accessible :id, :address, :house_id
-      my_attr_accessor :id, :address, :house_id
+      my_attr_accessible :id, :address
+      my_attr_accessor :id, :address
 
       has_many :humans
     end
