@@ -7,15 +7,10 @@ describe SQLObject do
 
   before(:all) do
     class Cat < SQLObject
-      my_attr_accessor :id, :name, :owner_id
-      my_attr_accessible :id, :name, :owner_id
     end
 
     class Human < SQLObject
       self.table_name = "humans"
-
-      my_attr_accessor :id, :fname, :lname, :house_id
-      my_attr_accessible :id, :fname, :lname, :house_id
     end
   end
 
@@ -91,9 +86,9 @@ describe SQLObject do
     it "#update changes attributes" do
       human = Human.find(2)
 
-    human.fname = "Matthew"
-    human.lname = "von Rubens"
-    human.update
+      human.fname = "Matthew"
+      human.lname = "von Rubens"
+      human.update
 
       # pull the human again
       human = Human.find(2)
