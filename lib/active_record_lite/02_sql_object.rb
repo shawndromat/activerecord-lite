@@ -9,6 +9,10 @@ class MassObject
 end
 
 class SQLObject < MassObject
+  def self.columns
+    # ...
+  end
+
   def self.table_name=(table_name)
     # ...
   end
@@ -25,7 +29,15 @@ class SQLObject < MassObject
     # ...
   end
 
+  def attributes
+    # ...
+  end
+
   def insert
+    # ...
+  end
+
+  def initialize
     # ...
   end
 

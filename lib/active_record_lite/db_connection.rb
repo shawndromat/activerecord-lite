@@ -36,6 +36,12 @@ class DBConnection
     self.instance.execute(*args)
   end
 
+  def self.execute2(*args)
+    puts args[0]
+
+    self.instance.execute2(*args)
+  end
+
   def self.last_insert_row_id
     self.instance.last_insert_row_id
   end
