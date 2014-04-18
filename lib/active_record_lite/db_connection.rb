@@ -51,3 +51,4 @@ class DBConnection
   def initialize(db_file_name)
   end
 end
+
