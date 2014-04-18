@@ -11,6 +11,7 @@ class MassObject
 end
 
 class SQLObject < AttrAccessorObject
+  
   def self.columns
     if @columns.nil?
       results = DBConnection.execute2(<<-SQL)
@@ -98,8 +99,12 @@ class SQLObject < AttrAccessorObject
     end
   end
 
-  def save
-    
+  def save 
+    if attributes["id"] == nil
+      insert
+    else
+      update
+    end
   end
 
   def update
@@ -113,7 +118,6 @@ class SQLObject < AttrAccessorObject
       SET #{update_string.join(", ")}
       WHERE id = #{self.id}
     SQL
-    p query
     DBConnection.execute(query, *vals_without_id)
   end
 
