@@ -22,7 +22,7 @@ describe SQLObject do
     it '::table_name generates default name' do
       expect(Cat.table_name).to eq('cats')
     end
-
+    # 
     # it '::parse_all turns an array of hashes into objects' do
     #   hashes = [
     #     { name: 'cat1', owner_id: 1 },

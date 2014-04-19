@@ -4,13 +4,17 @@ require 'active_support/inflector'
 require_relative '00_attr_accessor_object.rb'
 
 
-class MassObject
-  def self.parse_all(results)
-    # ...
-  end
+class MassObject < AttrAccessorObject
+  # def self.parse_all(results)
+  #   results.each_with_index do |result, i|
+  #     a = self.new(result)
+  #     p a
+  #     results[i] = a
+  #   end
+  # end
 end
 
-class SQLObject < AttrAccessorObject
+class SQLObject < MassObject
   
   def self.columns
     if @columns.nil?

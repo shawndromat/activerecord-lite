@@ -12,7 +12,7 @@ module Searchable
       WHERE
         #{where_line.join(" AND ")}
     SQL
-    results.map{ |result  | self.new(result)}
+    results.map{ |result| self.new(result)}
   end
 end
 
